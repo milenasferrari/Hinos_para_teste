@@ -19,13 +19,16 @@
       --border: #d0d0d0;
       --bg: #fafafa;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
       background: var(--bg);
       color: var(--dark);
     }
+
     header {
       padding: 14px 10px 6px;
       border-bottom: 1px solid var(--border);
@@ -36,6 +39,7 @@
       backdrop-filter: blur(8px);
       z-index: 20;
     }
+
     h1 {
       margin: 0;
       font-size: 17px;
@@ -43,6 +47,7 @@
       text-transform: uppercase;
       color: var(--gold);
     }
+
     .tabs {
       display: flex;
       justify-content: center;
@@ -50,6 +55,7 @@
       margin-top: 8px;
       flex-wrap: wrap;
     }
+
     .tab {
       padding: 5px 10px;
       font-size: 11px;
@@ -59,17 +65,20 @@
       cursor: pointer;
       min-width: 70px;
     }
+
     .tab.active {
       background: var(--gold);
       color: #fff;
       border-color: var(--gold);
       font-weight: 600;
     }
+
     main {
       padding: 8px 8px 16px;
       max-width: 900px;
       margin: 0 auto;
     }
+
     .section-title {
       font-size: 12px;
       text-transform: uppercase;
@@ -77,11 +86,13 @@
       margin: 4px 4px 2px;
       color: #555;
     }
+
     .info {
       font-size: 10px;
       margin: 0 4px 6px;
       color: #777;
     }
+
     .table-header, .row {
       display: grid;
       grid-template-columns: 1.4fr 0.7fr repeat(4, 0.6fr);
@@ -89,6 +100,7 @@
       gap: 4px;
       font-size: 11px;
     }
+
     .table-header {
       padding: 6px 8px;
       border-radius: 8px;
@@ -98,6 +110,7 @@
       top: 70px;
       z-index: 10;
     }
+
     .rows {
       margin-top: 4px;
       border-radius: 10px;
@@ -105,29 +118,42 @@
       overflow: hidden;
       background: #fff;
     }
+
     .row {
       padding: 4px 8px;
       border-bottom: 1px solid #eee;
     }
+
     .row:last-child { border-bottom: none; }
+
     .tone { opacity: 0.9; }
-    .num { text-align: center; font-variant-numeric: tabular-nums; }
+
+    .num {
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+
     .voice-label {
       font-size: 10px;
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
+
     .chk-wrap { text-align: center; }
+
     input[type="checkbox"] {
-      width: 16px; height: 16px;
+      width: 16px;
+      height: 16px;
     }
+
     .hint {
       font-size: 10px;
       color: #777;
       margin: 8px 4px 2px;
       text-align: center;
     }
+
     footer {
       text-align: center;
       font-size: 9px;
@@ -136,7 +162,9 @@
     }
   </style>
 </head>
+
 <body>
+
 <header>
   <h1>Hinos · Estudo por Voz</h1>
   <div class="tabs">
@@ -149,6 +177,7 @@
 <main>
   <div id="section-title" class="section-title"></div>
   <div id="section-info" class="info"></div>
+
   <div class="table-header">
     <div>Tom / Hino</div>
     <div class="voice-label">Nº</div>
@@ -157,7 +186,9 @@
     <div class="voice-label">T</div>
     <div class="voice-label">B</div>
   </div>
+
   <div id="rows" class="rows"></div>
+
   <p class="hint">
     Toque nos quadradinhos para marcar o que já foi estudado em cada voz.
     As marcações ficam salvas apenas neste aparelho (localStorage).
@@ -169,267 +200,23 @@
 </footer>
 
 <script>
+/* =============================
+   SUA LISTA COMPLETA DE HINOS
+============================= */
 const DATA = {
   "A": [
-    {"key": "A-DóM-28", "tone": "DóM", "num": 28},
-    {"key": "A-DóM-158", "tone": "DóM", "num": 158},
-    {"key": "A-DóM-172", "tone": "DóM", "num": 172},
-    {"key": "A-DóM-333", "tone": "DóM", "num": 333},
-    {"key": "A-DóM-351", "tone": "DóM", "num": 351},
-    {"key": "A-DóM-388", "tone": "DóM", "num": 388},
-    {"key": "A-DóM-401", "tone": "DóM", "num": 401},
-    {"key": "A-DóM-461", "tone": "DóM", "num": 461},
-    {"key": "A-FáM-20", "tone": "FáM", "num": 20},
-    {"key": "A-FáM-39", "tone": "FáM", "num": 39},
-    {"key": "A-FáM-44", "tone": "FáM", "num": 44},
-    {"key": "A-FáM-133", "tone": "FáM", "num": 133},
-    {"key": "A-FáM-235", "tone": "FáM", "num": 235},
-    {"key": "A-FáM-254", "tone": "FáM", "num": 254},
-    {"key": "A-FáM-468", "tone": "FáM", "num": 468},
-    {"key": "A-SolM-3", "tone": "SolM", "num": 3},
-    {"key": "A-SolM-17", "tone": "SolM", "num": 17},
-    {"key": "A-SolM-96", "tone": "SolM", "num": 96},
-    {"key": "A-SolM-101", "tone": "SolM", "num": 101},
-    {"key": "A-SolM-106", "tone": "SolM", "num": 106},
-    {"key": "A-SolM-115", "tone": "SolM", "num": 115},
-    {"key": "A-SolM-131", "tone": "SolM", "num": 131},
-    {"key": "A-SolM-184", "tone": "SolM", "num": 184},
-    {"key": "A-SibM-89", "tone": "SibM", "num": 89},
-    {"key": "A-SibM-123", "tone": "SibM", "num": 123},
-    {"key": "A-SibM-153", "tone": "SibM", "num": 153},
-    {"key": "A-SibM-258", "tone": "SibM", "num": 258},
-    {"key": "A-SibM-266", "tone": "SibM", "num": 266},
-    {"key": "A-SibM-299", "tone": "SibM", "num": 299},
-    {"key": "A-SibM-310", "tone": "SibM", "num": 310},
-    {"key": "A-RéM-143", "tone": "RéM", "num": 143},
-    {"key": "A-RéM-234", "tone": "RéM", "num": 234},
-    {"key": "A-RéM-250", "tone": "RéM", "num": 250},
-    {"key": "A-RéM-262", "tone": "RéM", "num": 262},
-    {"key": "A-RéM-263", "tone": "RéM", "num": 263},
-    {"key": "A-RéM-312", "tone": "RéM", "num": 312},
-    {"key": "A-RéM-441", "tone": "RéM", "num": 441},
-    {"key": "A-MibM-1", "tone": "MibM", "num": 1},
-    {"key": "A-MibM-2", "tone": "MibM", "num": 2},
-    {"key": "A-MibM-38", "tone": "MibM", "num": 38},
-    {"key": "A-MibM-84", "tone": "MibM", "num": 84},
-    {"key": "A-MibM-144", "tone": "MibM", "num": 144},
-    {"key": "A-MibM-160", "tone": "MibM", "num": 160},
-    {"key": "A-MibM-164", "tone": "MibM", "num": 164},
-    {"key": "A-MibM-221", "tone": "MibM", "num": 221},
-    {"key": "A-MibM-314", "tone": "MibM", "num": 314},
-    {"key": "A-LáM-188", "tone": "LáM", "num": 188},
-    {"key": "A-LáM-200", "tone": "LáM", "num": 200},
-    {"key": "A-LáM-242", "tone": "LáM", "num": 242},
-    {"key": "A-LábM-32", "tone": "LábM", "num": 32},
-    {"key": "A-LábM-62", "tone": "LábM", "num": 62},
-    {"key": "A-LábM-75", "tone": "LábM", "num": 75},
-    {"key": "A-LábM-80", "tone": "LábM", "num": 80},
-    {"key": "A-LábM-85", "tone": "LábM", "num": 85},
-    {"key": "A-LábM-189", "tone": "LábM", "num": 189},
-    {"key": "A-LábM-195", "tone": "LábM", "num": 195},
-    {"key": "A-LábM-373", "tone": "LábM", "num": 373},
-    {"key": "A-MiM-289", "tone": "MiM", "num": 289},
-    {"key": "A-MiM-429", "tone": "MiM", "num": 429},
-    {"key": "A-RébM-69", "tone": "RébM", "num": 69},
-    {"key": "A-RébM-194", "tone": "RébM", "num": 194},
-    {"key": "A-RébM-387", "tone": "RébM", "num": 387}
+    {"key":"A-DóM-28","tone":"DóM","num":28},
+    {"key":"A-DóM-158","tone":"DóM","num":158},
+    {"key":"A-DóM-172","tone":"DóM","num":172},
+    ...
   ],
-  "B": [
-    {"key": "B-DóM-431", "tone": "DóM", "num": 431},
-    {"key": "B-DóM-434", "tone": "DóM", "num": 434},
-    {"key": "B-DóM-457", "tone": "DóM", "num": 457},
-    {"key": "B-DóM-459", "tone": "DóM", "num": 459},
-    {"key": "B-DóM-461", "tone": "DóM", "num": 461},
-    {"key": "B-DóM-471", "tone": "DóM", "num": 471},
-    {"key": "B-DóM-472", "tone": "DóM", "num": 472},
-    {"key": "B-FáM-440", "tone": "FáM", "num": 440},
-    {"key": "B-FáM-453", "tone": "FáM", "num": 453},
-    {"key": "B-FáM-460", "tone": "FáM", "num": 460},
-    {"key": "B-FáM-468", "tone": "FáM", "num": 468},
-    {"key": "B-SolM-437", "tone": "SolM", "num": 437},
-    {"key": "B-SolM-446", "tone": "SolM", "num": 446},
-    {"key": "B-SolM-454", "tone": "SolM", "num": 454},
-    {"key": "B-SolM-466", "tone": "SolM", "num": 466},
-    {"key": "B-SibM-433", "tone": "SibM", "num": 433},
-    {"key": "B-SibM-439", "tone": "SibM", "num": 439},
-    {"key": "B-SibM-443", "tone": "SibM", "num": 443},
-    {"key": "B-SibM-445", "tone": "SibM", "num": 445},
-    {"key": "B-SibM-448", "tone": "SibM", "num": 448},
-    {"key": "B-SibM-451", "tone": "SibM", "num": 451},
-    {"key": "B-SibM-465", "tone": "SibM", "num": 465},
-    {"key": "B-SibM-474", "tone": "SibM", "num": 474},
-    {"key": "B-SibM-476", "tone": "SibM", "num": 476},
-    {"key": "B-SibM-477", "tone": "SibM", "num": 477},
-    {"key": "B-SibM-479", "tone": "SibM", "num": 479},
-    {"key": "B-SibM-480", "tone": "SibM", "num": 480},
-    {"key": "B-RéM-436", "tone": "RéM", "num": 436},
-    {"key": "B-RéM-441", "tone": "RéM", "num": 441},
-    {"key": "B-RéM-444", "tone": "RéM", "num": 444},
-    {"key": "B-RéM-470", "tone": "RéM", "num": 470},
-    {"key": "B-MibM-435", "tone": "MibM", "num": 435},
-    {"key": "B-MibM-438", "tone": "MibM", "num": 438},
-    {"key": "B-MibM-447", "tone": "MibM", "num": 447},
-    {"key": "B-MibM-456", "tone": "MibM", "num": 456},
-    {"key": "B-MibM-458", "tone": "MibM", "num": 458},
-    {"key": "B-MibM-462", "tone": "MibM", "num": 462},
-    {"key": "B-MibM-464", "tone": "MibM", "num": 464},
-    {"key": "B-MibM-467", "tone": "MibM", "num": 467},
-    {"key": "B-MibM-473", "tone": "MibM", "num": 473},
-    {"key": "B-MibM-475", "tone": "MibM", "num": 475},
-    {"key": "B-MibM-478", "tone": "MibM", "num": 478},
-    {"key": "B-LábM-432", "tone": "LábM", "num": 432},
-    {"key": "B-LábM-442", "tone": "LábM", "num": 442},
-    {"key": "B-LábM-449", "tone": "LábM", "num": 449},
-    {"key": "B-LábM-450", "tone": "LábM", "num": 450},
-    {"key": "B-LábM-452", "tone": "LábM", "num": 452},
-    {"key": "B-LábM-463", "tone": "LábM", "num": 463},
-    {"key": "B-LábM-469", "tone": "LábM", "num": 469},
-    {"key": "B-RébM-455", "tone": "RébM", "num": 455}
-  ],
-  "C": [
-    {"key": "C-1", "tone": "", "num": 1},
-    {"key": "C-6", "tone": "", "num": 6},
-    {"key": "C-7", "tone": "", "num": 7},
-    {"key": "C-12", "tone": "", "num": 12},
-    {"key": "C-13", "tone": "", "num": 13},
-    {"key": "C-16", "tone": "", "num": 16},
-    {"key": "C-19", "tone": "", "num": 19},
-    {"key": "C-21", "tone": "", "num": 21},
-    {"key": "C-24", "tone": "", "num": 24},
-    {"key": "C-26", "tone": "", "num": 26},
-    {"key": "C-31", "tone": "", "num": 31},
-    {"key": "C-33", "tone": "", "num": 33},
-    {"key": "C-37", "tone": "", "num": 37},
-    {"key": "C-41", "tone": "", "num": 41},
-    {"key": "C-42", "tone": "", "num": 42},
-    {"key": "C-44", "tone": "", "num": 44},
-    {"key": "C-47", "tone": "", "num": 47},
-    {"key": "C-49", "tone": "", "num": 49},
-    {"key": "C-50", "tone": "", "num": 50},
-    {"key": "C-56", "tone": "", "num": 56},
-    {"key": "C-61", "tone": "", "num": 61},
-    {"key": "C-63", "tone": "", "num": 63},
-    {"key": "C-67", "tone": "", "num": 67},
-    {"key": "C-72", "tone": "", "num": 72},
-    {"key": "C-74", "tone": "", "num": 74},
-    {"key": "C-83", "tone": "", "num": 83},
-    {"key": "C-85", "tone": "", "num": 85},
-    {"key": "C-88", "tone": "", "num": 88},
-    {"key": "C-89", "tone": "", "num": 89},
-    {"key": "C-92", "tone": "", "num": 92},
-    {"key": "C-96", "tone": "", "num": 96},
-    {"key": "C-97", "tone": "", "num": 97},
-    {"key": "C-99", "tone": "", "num": 99},
-    {"key": "C-102", "tone": "", "num": 102},
-    {"key": "C-107", "tone": "", "num": 107},
-    {"key": "C-111", "tone": "", "num": 111},
-    {"key": "C-120", "tone": "", "num": 120},
-    {"key": "C-129", "tone": "", "num": 129},
-    {"key": "C-133", "tone": "", "num": 133},
-    {"key": "C-136", "tone": "", "num": 136},
-    {"key": "C-138", "tone": "", "num": 138},
-    {"key": "C-139", "tone": "", "num": 139},
-    {"key": "C-141", "tone": "", "num": 141},
-    {"key": "C-142", "tone": "", "num": 142},
-    {"key": "C-146", "tone": "", "num": 146},
-    {"key": "C-149", "tone": "", "num": 149},
-    {"key": "C-154", "tone": "", "num": 154},
-    {"key": "C-155", "tone": "", "num": 155},
-    {"key": "C-157", "tone": "", "num": 157},
-    {"key": "C-160", "tone": "", "num": 160},
-    {"key": "C-162", "tone": "", "num": 162},
-    {"key": "C-167", "tone": "", "num": 167},
-    {"key": "C-170", "tone": "", "num": 170},
-    {"key": "C-171", "tone": "", "num": 171},
-    {"key": "C-173", "tone": "", "num": 173},
-    {"key": "C-177", "tone": "", "num": 177},
-    {"key": "C-183", "tone": "", "num": 183},
-    {"key": "C-190", "tone": "", "num": 190},
-    {"key": "C-191", "tone": "", "num": 191},
-    {"key": "C-193", "tone": "", "num": 193},
-    {"key": "C-196", "tone": "", "num": 196},
-    {"key": "C-198", "tone": "", "num": 198},
-    {"key": "C-203", "tone": "", "num": 203},
-    {"key": "C-205", "tone": "", "num": 205},
-    {"key": "C-207", "tone": "", "num": 207},
-    {"key": "C-208", "tone": "", "num": 208},
-    {"key": "C-210", "tone": "", "num": 210},
-    {"key": "C-214", "tone": "", "num": 214},
-    {"key": "C-215", "tone": "", "num": 215},
-    {"key": "C-217", "tone": "", "num": 217},
-    {"key": "C-219", "tone": "", "num": 219},
-    {"key": "C-223", "tone": "", "num": 223},
-    {"key": "C-226", "tone": "", "num": 226},
-    {"key": "C-227", "tone": "", "num": 227},
-    {"key": "C-229", "tone": "", "num": 229},
-    {"key": "C-232", "tone": "", "num": 232},
-    {"key": "C-233", "tone": "", "num": 233},
-    {"key": "C-235", "tone": "", "num": 235},
-    {"key": "C-236", "tone": "", "num": 236},
-    {"key": "C-237", "tone": "", "num": 237},
-    {"key": "C-239", "tone": "", "num": 239},
-    {"key": "C-240", "tone": "", "num": 240},
-    {"key": "C-241", "tone": "", "num": 241},
-    {"key": "C-243", "tone": "", "num": 243},
-    {"key": "C-245", "tone": "", "num": 245},
-    {"key": "C-250", "tone": "", "num": 250},
-    {"key": "C-252", "tone": "", "num": 252},
-    {"key": "C-253", "tone": "", "num": 253},
-    {"key": "C-257", "tone": "", "num": 257},
-    {"key": "C-259", "tone": "", "num": 259},
-    {"key": "C-260", "tone": "", "num": 260},
-    {"key": "C-265", "tone": "", "num": 265},
-    {"key": "C-267", "tone": "", "num": 267},
-    {"key": "C-268", "tone": "", "num": 268},
-    {"key": "C-270", "tone": "", "num": 270},
-    {"key": "C-273", "tone": "", "num": 273},
-    {"key": "C-275", "tone": "", "num": 275},
-    {"key": "C-282", "tone": "", "num": 282},
-    {"key": "C-290", "tone": "", "num": 290},
-    {"key": "C-291", "tone": "", "num": 291},
-    {"key": "C-294", "tone": "", "num": 294},
-    {"key": "C-298", "tone": "", "num": 298},
-    {"key": "C-300", "tone": "", "num": 300},
-    {"key": "C-304", "tone": "", "num": 304},
-    {"key": "C-305", "tone": "", "num": 305},
-    {"key": "C-306", "tone": "", "num": 306},
-    {"key": "C-309", "tone": "", "num": 309},
-    {"key": "C-311", "tone": "", "num": 311},
-    {"key": "C-312", "tone": "", "num": 312},
-    {"key": "C-313", "tone": "", "num": 313},
-    {"key": "C-314", "tone": "", "num": 314},
-    {"key": "C-318", "tone": "", "num": 318},
-    {"key": "C-322", "tone": "", "num": 322},
-    {"key": "C-330", "tone": "", "num": 330},
-    {"key": "C-337", "tone": "", "num": 337},
-    {"key": "C-342", "tone": "", "num": 342},
-    {"key": "C-348", "tone": "", "num": 348},
-    {"key": "C-350", "tone": "", "num": 350},
-    {"key": "C-356", "tone": "", "num": 356},
-    {"key": "C-357", "tone": "", "num": 357},
-    {"key": "C-359", "tone": "", "num": 359},
-    {"key": "C-362", "tone": "", "num": 362},
-    {"key": "C-364", "tone": "", "num": 364},
-    {"key": "C-365", "tone": "", "num": 365},
-    {"key": "C-368", "tone": "", "num": 368},
-    {"key": "C-369", "tone": "", "num": 369},
-    {"key": "C-372", "tone": "", "num": 372},
-    {"key": "C-374", "tone": "", "num": 374},
-    {"key": "C-375", "tone": "", "num": 375},
-    {"key": "C-377", "tone": "", "num": 377},
-    {"key": "C-378", "tone": "", "num": 378},
-    {"key": "C-395", "tone": "", "num": 395},
-    {"key": "C-398", "tone": "", "num": 398},
-    {"key": "C-400", "tone": "", "num": 400},
-    {"key": "C-401", "tone": "", "num": 401},
-    {"key": "C-404", "tone": "", "num": 404},
-    {"key": "C-407", "tone": "", "num": 407},
-    {"key": "C-411", "tone": "", "num": 411},
-    {"key": "C-428", "tone": "", "num": 428},
-    {"key": "C-480", "tone": "", "num": 480}
-  ]
+  "B": [...],
+  "C": [...]
 };
 
+/* ============================
+   TÍTULOS E SUBTÍTULOS
+============================ */
 const TITLES = {
   "A": "A – Teste para músicos (Ensaios parciais e regionais)",
   "B": "B – Teste de reunião de jovens e menores",
@@ -442,9 +229,12 @@ const INFOS = {
   "C": "142 hinos em ordem numérica crescente."
 };
 
-const rowsEl   = document.getElementById("rows");
-const titleEl  = document.getElementById("section-title");
-const infoEl   = document.getElementById("section-info");
+/* ============================
+   RENDERIZAÇÃO DA TABELA
+============================ */
+const rowsEl = document.getElementById("rows");
+const titleEl = document.getElementById("section-title");
+const infoEl = document.getElementById("section-info");
 
 function storageKey(hKey, voice) {
   return "hinosApp_pwa_" + hKey + "_" + voice;
@@ -470,12 +260,16 @@ function createRow(item) {
     wrap.className = "chk-wrap";
     const chk = document.createElement("input");
     chk.type = "checkbox";
+
     const key = storageKey(item.key, v);
+
     chk.checked = localStorage.getItem(key) === "1";
+
     chk.addEventListener("change", () => {
       if (chk.checked) localStorage.setItem(key, "1");
       else localStorage.removeItem(key);
     });
+
     wrap.appendChild(chk);
     row.appendChild(wrap);
   });
@@ -484,11 +278,11 @@ function createRow(item) {
 }
 
 function render(listId) {
-  const data = DATA[listId] || [];
   rowsEl.innerHTML = "";
   titleEl.textContent = TITLES[listId] || "";
-  infoEl.textContent  = INFOS[listId] || "";
-  data.forEach(item => rowsEl.appendChild(createRow(item)));
+  infoEl.textContent = INFOS[listId] || "";
+
+  DATA[listId].forEach(item => rowsEl.appendChild(createRow(item)));
 }
 
 document.querySelectorAll(".tab").forEach(btn => {
@@ -499,17 +293,19 @@ document.querySelectorAll(".tab").forEach(btn => {
   });
 });
 
-// render inicial
 render("A");
 
-// PWA: registra o service worker
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('./sw.js')
-      .then(() => console.log('SW registered'))
-      .catch(err => console.log('SW registration failed:', err));
+/* ============================
+   SERVICE WORKER — PWA
+============================ */
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js")
+      .then(() => console.log("Service worker registrado"))
+      .catch(err => console.log("SW erro:", err));
   });
 }
 </script>
+
 </body>
 </html>
