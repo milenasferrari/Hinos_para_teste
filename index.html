@@ -19,16 +19,13 @@
       --border: #d0d0d0;
       --bg: #fafafa;
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
       background: var(--bg);
       color: var(--dark);
     }
-
     header {
       padding: 14px 10px 6px;
       border-bottom: 1px solid var(--border);
@@ -39,7 +36,6 @@
       backdrop-filter: blur(8px);
       z-index: 20;
     }
-
     h1 {
       margin: 0;
       font-size: 17px;
@@ -47,7 +43,6 @@
       text-transform: uppercase;
       color: var(--gold);
     }
-
     .tabs {
       display: flex;
       justify-content: center;
@@ -55,7 +50,6 @@
       margin-top: 8px;
       flex-wrap: wrap;
     }
-
     .tab {
       padding: 5px 10px;
       font-size: 11px;
@@ -65,20 +59,17 @@
       cursor: pointer;
       min-width: 70px;
     }
-
     .tab.active {
       background: var(--gold);
       color: #fff;
       border-color: var(--gold);
       font-weight: 600;
     }
-
     main {
       padding: 8px 8px 16px;
       max-width: 900px;
       margin: 0 auto;
     }
-
     .section-title {
       font-size: 12px;
       text-transform: uppercase;
@@ -86,13 +77,11 @@
       margin: 4px 4px 2px;
       color: #555;
     }
-
     .info {
       font-size: 10px;
       margin: 0 4px 6px;
       color: #777;
     }
-
     .table-header, .row {
       display: grid;
       grid-template-columns: 1.4fr 0.7fr repeat(4, 0.6fr);
@@ -100,7 +89,6 @@
       gap: 4px;
       font-size: 11px;
     }
-
     .table-header {
       padding: 6px 8px;
       border-radius: 8px;
@@ -110,7 +98,6 @@
       top: 70px;
       z-index: 10;
     }
-
     .rows {
       margin-top: 4px;
       border-radius: 10px;
@@ -118,42 +105,29 @@
       overflow: hidden;
       background: #fff;
     }
-
     .row {
       padding: 4px 8px;
       border-bottom: 1px solid #eee;
     }
-
     .row:last-child { border-bottom: none; }
-
     .tone { opacity: 0.9; }
-
-    .num {
-      text-align: center;
-      font-variant-numeric: tabular-nums;
-    }
-
+    .num { text-align: center; font-variant-numeric: tabular-nums; }
     .voice-label {
       font-size: 10px;
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
-
     .chk-wrap { text-align: center; }
-
     input[type="checkbox"] {
-      width: 16px;
-      height: 16px;
+      width: 16px; height: 16px;
     }
-
     .hint {
       font-size: 10px;
       color: #777;
       margin: 8px 4px 2px;
       text-align: center;
     }
-
     footer {
       text-align: center;
       font-size: 9px;
@@ -162,9 +136,7 @@
     }
   </style>
 </head>
-
 <body>
-
 <header>
   <h1>Hinos · Estudo por Voz</h1>
   <div class="tabs">
@@ -177,7 +149,6 @@
 <main>
   <div id="section-title" class="section-title"></div>
   <div id="section-info" class="info"></div>
-
   <div class="table-header">
     <div>Tom / Hino</div>
     <div class="voice-label">Nº</div>
@@ -186,9 +157,7 @@
     <div class="voice-label">T</div>
     <div class="voice-label">B</div>
   </div>
-
   <div id="rows" class="rows"></div>
-
   <p class="hint">
     Toque nos quadradinhos para marcar o que já foi estudado em cada voz.
     As marcações ficam salvas apenas neste aparelho (localStorage).
@@ -200,23 +169,24 @@
 </footer>
 
 <script>
-/* =============================
-   SUA LISTA COMPLETA DE HINOS
-============================= */
+// DADOS DE TESTE – poucos hinos só pra garantir que tudo funciona
 const DATA = {
   "A": [
-    {"key":"A-DóM-28","tone":"DóM","num":28},
-    {"key":"A-DóM-158","tone":"DóM","num":158},
-    {"key":"A-DóM-172","tone":"DóM","num":172},
-    ...
+    { key: "A-DóM-28", tone: "DóM", num: 28 },
+    { key: "A-FáM-39", tone: "FáM", num: 39 },
+    { key: "A-SolM-3", tone: "SolM", num: 3 }
   ],
-  "B": [...],
-  "C": [...]
+  "B": [
+    { key: "B-DóM-431", tone: "DóM", num: 431 },
+    { key: "B-SibM-439", tone: "SibM", num: 439 }
+  ],
+  "C": [
+    { key: "C-1", tone: "", num: 1 },
+    { key: "C-6", tone: "", num: 6 },
+    { key: "C-7", tone: "", num: 7 }
+  ]
 };
 
-/* ============================
-   TÍTULOS E SUBTÍTULOS
-============================ */
 const TITLES = {
   "A": "A – Teste para músicos (Ensaios parciais e regionais)",
   "B": "B – Teste de reunião de jovens e menores",
@@ -224,17 +194,14 @@ const TITLES = {
 };
 
 const INFOS = {
-  "A": "62 hinos por ordem crescente de acidentes.",
-  "B": "50 hinos por ordem crescente de acidentes.",
-  "C": "142 hinos em ordem numérica crescente."
+  "A": "Alguns hinos de teste (lista reduzida).",
+  "B": "Alguns hinos de jovens (lista reduzida).",
+  "C": "Alguns hinos do culto oficial (lista reduzida)."
 };
 
-/* ============================
-   RENDERIZAÇÃO DA TABELA
-============================ */
-const rowsEl = document.getElementById("rows");
-const titleEl = document.getElementById("section-title");
-const infoEl = document.getElementById("section-info");
+const rowsEl   = document.getElementById("rows");
+const titleEl  = document.getElementById("section-title");
+const infoEl   = document.getElementById("section-info");
 
 function storageKey(hKey, voice) {
   return "hinosApp_pwa_" + hKey + "_" + voice;
@@ -260,16 +227,12 @@ function createRow(item) {
     wrap.className = "chk-wrap";
     const chk = document.createElement("input");
     chk.type = "checkbox";
-
     const key = storageKey(item.key, v);
-
     chk.checked = localStorage.getItem(key) === "1";
-
     chk.addEventListener("change", () => {
       if (chk.checked) localStorage.setItem(key, "1");
       else localStorage.removeItem(key);
     });
-
     wrap.appendChild(chk);
     row.appendChild(wrap);
   });
@@ -278,33 +241,35 @@ function createRow(item) {
 }
 
 function render(listId) {
+  const data = DATA[listId] || [];
   rowsEl.innerHTML = "";
   titleEl.textContent = TITLES[listId] || "";
-  infoEl.textContent = INFOS[listId] || "";
-
-  DATA[listId].forEach(item => rowsEl.appendChild(createRow(item)));
+  infoEl.textContent  = INFOS[listId] || "";
+  data.forEach(item => rowsEl.appendChild(createRow(item)));
 }
 
-document.querySelectorAll(".tab").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    render(btn.dataset.tab);
+document.addEventListener("DOMContentLoaded", () => {
+  // tabs
+  document.querySelectorAll(".tab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      render(btn.dataset.tab);
+    });
   });
+
+  // render inicial
+  render("A");
+
+  // PWA: registra o service worker (não interfere na tabela)
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("./sw.js")
+        .then(() => console.log("SW registered"))
+        .catch(err => console.log("SW registration failed:", err));
+    });
+  }
 });
-
-render("A");
-
-/* ============================
-   SERVICE WORKER — PWA
-============================ */
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js")
-      .then(() => console.log("Service worker registrado"))
-      .catch(err => console.log("SW erro:", err));
-  });
-}
 </script>
 
 </body>
