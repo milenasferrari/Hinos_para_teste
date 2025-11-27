@@ -2,6 +2,19 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Hinos para Ensaio</title>
+
+  <meta name="theme-color" content="#0b3c5d" />
+
+  <!-- Manifest PWA -->
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <!-- Ícone para atalho no iPhone (depois a gente cria a imagem) -->
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+  <meta charset="UTF-8" />
   <title>Hinos · Estudo por Voz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#C9A86A" />
@@ -234,12 +247,14 @@ document.querySelectorAll(".tab").forEach(btn => {
 render("A");
 
 // PWA: register service worker
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js")
-      .catch(err => console.log("SW registration failed", err));
-  });
-}
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('./sw.js')
+        .then(() => console.log('SW registered'))
+        .catch(err => console.log('SW registration failed:', err));
+    });
+  }
 </script>
 </body>
 </html>
